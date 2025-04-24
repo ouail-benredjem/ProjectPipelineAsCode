@@ -1,0 +1,16 @@
+.env
+.env.example
+
+# Fichiers exécutables
+*.exe
+
+# Données Minio
+minio_data/
+
+# Dossiers système
+.git/
+__pycache__/
+*.pyc
+
+# Autres fichiers volumineux
+*.parquet

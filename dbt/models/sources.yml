@@ -1,0 +1,75 @@
+version: 2
+
+sources:
+  - name: postgres
+    description: "PostgreSQL database containing processed taxi trips and weather data"
+    database: Minio
+    schema: public
+    tables:
+      - name: fact_taxi_trips
+        description: "Processed NYC Yellow Taxi trips data from PySpark"
+        columns:
+          - name: pickup_datetime
+            description: "Timestamp when the taxi ride started"
+          - name: dropoff_datetime
+            description: "Timestamp when the taxi ride ended"
+          - name: trip_duration_minutes
+            description: "Duration of the trip in minutes"
+          - name: pickup_hour
+            description: "Hour of the day when pickup occurred (0-23)"
+          - name: pickup_day_of_week
+            description: "Day of the week when pickup occurred (1-7, Monday=1)"
+          - name: passenger_count
+            description: "Number of passengers in the trip"
+          - name: trip_distance
+            description: "Distance of the trip in miles"
+          - name: distance_category
+            description: "Trip distance categorized as '0-2 km', '2-5 km', or '>5 km'"
+          - name: pickup_location_id
+            description: "ID of the pickup location zone"
+          - name: dropoff_location_id
+            description: "ID of the dropoff location zone"
+          - name: fare_amount
+            description: "Base fare amount in USD"
+          - name: tip_amount
+            description: "Tip amount in USD"
+          - name: tip_percentage
+            description: "Tip as a percentage of the fare amount"
+          - name: total_amount
+            description: "Total amount charged in USD"
+          - name: payment_type
+            description: "Payment type ID"
+          - name: payment_type_desc
+            description: "Description of the payment type (e.g., 'Credit card', 'Cash')"
+
+      - name: dim_weather
+        description: "Processed weather data from NYC via Flink"
+        columns:
+          - name: timestamp
+            description: "Timestamp of the weather observation"
+          - name: city
+            description: "City name (New York)"
+          - name: temperature
+            description: "Temperature in Celsius"
+          - name: feels_like
+            description: "Feels like temperature in Celsius"
+          - name: humidity
+            description: "Humidity percentage"
+          - name: wind_speed
+            description: "Wind speed in meters per second"
+          - name: wind_direction
+            description: "Wind direction in degrees"
+          - name: weather_main
+            description: "Main weather condition (e.g., 'Rain', 'Clear')"
+          - name: weather_description
+            description: "Detailed weather description"
+          - name: weather_category
+            description: "Weather categorized as 'Clear', 'Rainy', 'Stormy', 'Cloudy', 'Snowy', or 'Other'"
+          - name: pressure
+            description: "Atmospheric pressure in hPa"
+          - name: hour_of_day
+            description: "Hour of the day (0-23)"
+          - name: day_of_week
+            description: "Day of the week (0-6, Sunday=0)"
+          - name: processing_time
+            description: "Timestamp when the record was processed"
